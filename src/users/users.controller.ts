@@ -9,6 +9,7 @@ import {
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { User } from "./entities/user.entity";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 @Controller("users")

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Args, Query, Resolver } from "@nestjs/graphql";
 import { User } from "../graphql/User";
 import { InjectModel } from "@nestjs/mongoose";
