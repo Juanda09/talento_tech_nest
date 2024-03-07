@@ -3,9 +3,9 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
 } from "@nestjs/common";
 import { HouseService } from "./house.service";
 import { CreateHouseDto } from "./dto/create-house.dto";
@@ -30,7 +30,7 @@ export class HouseController {
     return this.houseService.getHouseByCode(code);
   }
 
-  @Patch(":code")
+  @Put(":code")
   update(@Param("code") code: string, updateHouseDto: UpdateHouseDto) {
     return this.houseService.updateHouseByCode(code, updateHouseDto);
   }
