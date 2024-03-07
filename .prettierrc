@@ -1,11 +1,8 @@
 {
   "prettier/prettier": [
     "error",
-    {},
     {
-      "fileInfoOptions": {
-        "withNodeModules": true
-      }
+      "endOfLine": "auto"
     }
   ]
 }

@@ -17,26 +17,26 @@ export class HouseController {
 
   @Post()
   create(@Body() createHouseDto: CreateHouseDto) {
-    return this.houseService.create(createHouseDto);
+    return this.houseService.createHouse(createHouseDto);
   }
 
   @Get()
   findAll() {
-    return this.houseService.findAll();
+    return this.houseService.getHouses();
   }
 
-  @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.houseService.findOne(+id);
+  @Get(":code")
+  findOne(@Param("code") code: string) {
+    return this.houseService.getHouseByCode(code);
   }
 
-  @Patch(":id")
-  update(@Param("id") id: string, @Body() updateHouseDto: UpdateHouseDto) {
-    return this.houseService.update(+id, updateHouseDto);
+  @Patch(":code")
+  update(@Param("code") code: string, updateHouseDto: UpdateHouseDto) {
+    return this.houseService.updateHouseByCode(code, updateHouseDto);
   }
 
-  @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.houseService.remove(+id);
+  @Delete(":code")
+  remove(@Param("code") code: string) {
+    return this.houseService.deleteHouseByCode(code);
   }
 }
