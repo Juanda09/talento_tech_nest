@@ -21,7 +21,7 @@ export class House {
   type: string;
 
   @Field()
-  zipCode: string;
+  zip_code: string;
 
   @Field()
   rooms: number;

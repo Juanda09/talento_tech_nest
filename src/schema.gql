@@ -25,7 +25,7 @@ type House {
   state: String!
   size: Float!
   type: String!
-  zipCode: String!
+  zip_code: String!
   rooms: Float!
   bathrooms: Float!
   parking: Boolean!

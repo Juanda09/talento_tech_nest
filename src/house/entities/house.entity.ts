@@ -5,7 +5,7 @@ export class House {
   state: string;
   size: number;
   type: string;
-  zipCode: string;
+  zip_code: string;
   rooms: number;
   bathrooms: number;
   parking: boolean;
