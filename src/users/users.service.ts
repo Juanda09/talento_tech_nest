@@ -10,6 +10,12 @@ import * as bcrypt from "bcryptjs"; // Importamos bcryptjs en lugar de bcrypt
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 
+function validateEmail(email: string): boolean {
+  // Expresión regular para validar correos electrónicos
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
 @Injectable()
 export class UsersService {
   constructor(@InjectModel("User") private readonly userModel: Model<User>) {}
@@ -35,10 +41,11 @@ export class UsersService {
         "La contraseña debe tener al menos 6 caracteres",
       );
     }
-
+    if (!validateEmail(email)) {
+      throw new BadRequestException("El correo electrónico no es válido");
+    }
     // Encriptar la contraseña utilizando bcryptjs
     const hashedPassword = await bcrypt.hash(password, 10);
-
     // Crear un nuevo usuario con la contraseña encriptada
     const newUser = new this.userModel({
       ...CreateUserDto,
@@ -54,7 +61,9 @@ export class UsersService {
     if (!existingUser) {
       throw new NotFoundException("Usuario no encontrado");
     }
-
+    if (!validateEmail(existingUser.email)) {
+      throw new BadRequestException("El correo electrónico no es válido");
+    }
     // Actualizar los campos del usuario con los datos proporcionados en updateUserDto
     if (updateUserDto.name) {
       existingUser.name = updateUserDto.name;

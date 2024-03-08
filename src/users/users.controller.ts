@@ -35,7 +35,16 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
   @Delete("/:id")
-  async delete(@Param("id") id: string): Promise<User> {
-    return this.usersService.delete(id);
+  async delete(@Param("id") id: string): Promise<any> {
+    try {
+      const result = await this.usersService.delete(id);
+      if (result) {
+        return { message: "Usuario eliminado exitosamente" };
+      } else {
+        return { message: "El usuario no se encontró o no pudo ser eliminado" };
+      }
+    } catch (error) {
+      return { message: "Ocurrió un error al intentar eliminar el usuario" };
+    }
   }
 }
