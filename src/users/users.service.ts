@@ -84,22 +84,27 @@ export class UsersService {
     // Devolver el usuario actualizado
     return existingUser;
   }
-  async delete(_id: string): Promise<User> {
+  async delete(_id: string): Promise<boolean> {
     // Buscar el usuario existente por su ID
-    const existingUser = await this.userModel.findById(_id).exec();
-    if (!existingUser) {
-      throw new NotFoundException("Usuario no encontrado");
+    try {
+      const existingUser = await this.userModel.findById(_id).exec();
+      if (!existingUser) {
+        throw new NotFoundException("Usuario no encontrado");
+      }
+
+      // Eliminar el usuario utilizando deleteOne
+      const deletedUser = await this.userModel.deleteOne({ _id }).exec();
+
+      // Verificar si se eliminó correctamente
+      if (deletedUser.deletedCount === 0) {
+        throw new NotFoundException("No se pudo eliminar el usuario");
+      }
+
+      return true;
+      // Devolver el usuario eliminado
+    } catch (error) {
+      console.error("Error al buscar usuarios por filtro:", error);
+      throw error;
     }
-
-    // Eliminar el usuario utilizando deleteOne
-    const deletedUser = await this.userModel.deleteOne({ _id }).exec();
-
-    // Verificar si se eliminó correctamente
-    if (deletedUser.deletedCount === 0) {
-      throw new NotFoundException("No se pudo eliminar el usuario");
-    }
-
-    // Devolver el usuario eliminado
-    return existingUser;
   }
 }
