@@ -10,7 +10,6 @@ export class CreateUserDto {
   @IsString({ message: "El nombre debe ser una cadena de caracteres." })
   @Length(2, 50, { message: "El nombre debe tener entre 2 y 50 caracteres." })
   readonly name: string;
-
   @IsEmail({}, { message: "El email proporcionado no es válido." })
   readonly email: string;
 
@@ -27,8 +26,6 @@ export class CreateUserDto {
 
   readonly avatar: string;
 
-  @IsString({ message: "El apellido debe ser una cadena de caracteres." })
-  @Length(2, 50, { message: "El apellido debe tener entre 2 y 50 caracteres." })
   readonly lastname: string;
 
   readonly age: number;

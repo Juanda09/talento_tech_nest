@@ -107,4 +107,7 @@ export class UsersService {
       throw error;
     }
   }
+  async findByEmail(email: string): Promise<User> {
+    return await this.userModel.findOne({ email }).exec();
+  }
 }
