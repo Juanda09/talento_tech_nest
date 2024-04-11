@@ -12,6 +12,8 @@ import { User } from "./entities/user.entity";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags("Users")
 @Controller("users")
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
